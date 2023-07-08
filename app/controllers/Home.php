@@ -4,9 +4,11 @@ namespace App\controllers;
 
 class Home
 {
-    public function index($params)
+    public function index($params): array
     {
-        var_dump($params);
-        die();
+        return [
+            'view' => 'home.php',
+            'data' => ['name' => 'Lucas Silvério']
+        ];
     }
 }

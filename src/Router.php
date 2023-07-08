@@ -34,10 +34,11 @@ class Router
         return $pathInfo;
     }
 
-    public function run(): string
+    public function run()
     {
         $pathInfo = $this->getCurrentUrl();
         $method = strtolower($_SERVER['REQUEST_METHOD']);
+        $exists = false;
 
         if (empty($this->routes[$method])) {
             throw new HttpException('Página não encontrada', 404);
@@ -46,12 +47,12 @@ class Router
         foreach ($this->routes[$method] as $route => $action) {
             if (preg_match($route, $pathInfo, $params)) {
                 $controller = new Controller();
-                $controller->manage($action($params), $params);
-                //return $action($params);
+                return $controller->manage($action($params), $params);
+                $exists = true;
             }
         }
         
-        throw new HttpException('Página não encontrada', 404);
-        
+        if (!$exists)
+            throw new HttpException('Página não encontrada', 404);
     }
 }

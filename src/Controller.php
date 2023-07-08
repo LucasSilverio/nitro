@@ -25,6 +25,6 @@ class Controller
             throw new HttpException("Método {$method} não encontrado no controller {$controller}", 406);
         }
 
-        $controllerInstance->$method($params);
+        return $controllerInstance->$method($params);
     }
 }

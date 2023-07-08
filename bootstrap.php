@@ -14,7 +14,22 @@ $router = new Router();
 require __DIR__ . '/config/routes.php';
 
 try {
-    echo $router->run();
+    $data = $router->run();
+
+    extract($data['data']);
+
+    if (!isset($data['view'])) {
+        throw new Exception("A view não foi informada.");
+    }
+
+    if (!file_exists(__DIR__.'/app/views/'.$data['view'])) {
+        throw new Exception("A view {$data['view']} não existe.");
+    }
+
+    $view = $data['view'];
+
+    require __DIR__.'/app/views/template.php';
+    
 } catch(HttpException $e) {
     echo $e->getMessage();
 } catch(Exception $e) {
