@@ -3,8 +3,8 @@
     "description": "Teste solicitado pela empresa Nitro News",
     "autoload": {
         "psr-4": {
-            "nitro\\":"src",
-            "app\\": "app"
+            "Nitro\\App\\":"src",
+            "App\\": "app"
         }
     },
     "authors": [

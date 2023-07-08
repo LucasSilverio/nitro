@@ -6,6 +6,6 @@ $vendorDir = dirname(__DIR__);
 $baseDir = dirname($vendorDir);
 
 return array(
-    'nitro\\' => array($baseDir . '/src'),
-    'app\\' => array($baseDir . '/app'),
+    'Nitro\\App\\' => array($baseDir . '/src'),
+    'App\\' => array($baseDir . '/app'),
 );
