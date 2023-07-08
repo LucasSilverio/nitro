@@ -1,0 +1,47 @@
+services:
+  nitro-app:
+    build:
+      args:
+        user: lucas
+        uid: 1000
+      context: ./
+      dockerfile: Dockerfile
+    image: lucazsilverio/nitro
+    working_dir: /var/www
+    volumes:
+      - ./:/var/www
+    restart: unless-stopped
+    networks:
+      - app-nitro
+  
+  #nginx
+  nginx:
+    image: nginx:alpine
+    restart: always
+    ports:
+      - 8585:80
+    volumes:
+      - ./:/var/www
+      - ./docker/nginx/:/etc/nginx/conf.d/
+    networks:
+      - app-nitro
+
+  #mysql
+  mysql:
+    image: mysql:5.7.22
+    restart: unless-stopped
+    ports:
+      - 3315:3306
+    volumes:
+      - ./.docker/mysql:/var/lib/mysql
+    environment:
+      MYSQL_DATABASE: ${DB_DATABASE}
+      MYSQL_ROOT_PASSWORD: ${DB_PASSWORD}
+      MYSQL_USER: ${DB_USERNAME}
+      MYSQL_PASSWORD: ${DB_PASSWORD}
+    networks:
+      - app-nitro
+
+networks:
+  app-nitro:
+    driver: bridge
