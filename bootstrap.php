@@ -11,21 +11,13 @@ use Nitro\App\Exceptions\{
 
 $router = new Router();
 
-$router->add('GET', '/', function(){
-    return 'Home';
-});
-
-$router->add('GET', '/usuarios', function() {
-    return "Listar os usuários";
-});
-
-$router->add('GET', '/usuarios/(\d+)', function($params){
-    return 'Listar usuário específico: '.$params[1];
-});
+require __DIR__ . '/config/routes.php';
 
 try {
     echo $router->run();
 } catch(HttpException $e) {
+    echo $e->getMessage();
+} catch(Exception $e) {
     echo $e->getMessage();
 }
 

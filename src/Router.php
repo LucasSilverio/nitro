@@ -3,6 +3,7 @@
 namespace Nitro\App;
 
 use Nitro\App\Exceptions\HttpException;
+use Nitro\App\Controller;
 
 class Router
 {
@@ -44,7 +45,9 @@ class Router
         
         foreach ($this->routes[$method] as $route => $action) {
             if (preg_match($route, $pathInfo, $params)) {
-                return $action($params);
+                $controller = new Controller();
+                $controller->manage($action($params), $params);
+                //return $action($params);
             }
         }
         
