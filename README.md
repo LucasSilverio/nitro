@@ -6,6 +6,8 @@ Procurei utilizar os recursos que o PHP oferece pensando não apenas na simplici
 
 Foi criado um "mini sistema" de rotas para simplificar a organização do projeto, e para deixar a url mais amigável.
 
+Não criei máscara no campo de telefone e nível, tive um foco maior em criar uma estrutura para backend que seja bastante prática em adicionar quaisquer novos recursos.
+
 
 ## Rodando localmente
 
