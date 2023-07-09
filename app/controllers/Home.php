@@ -2,13 +2,21 @@
 
 namespace App\controllers;
 
-class Home
+use App\classes\Usuario;
+use App\database\models\Read;
+
+class Home 
 {
+
     public function index($params): array
     {
+        
+        $usuario = new Usuario();
+        $data = $usuario->getAll();
+
         return [
             'view' => 'home.php',
-            'data' => ['name' => 'Lucas Silvério']
+            'data' => $data
         ];
     }
 }

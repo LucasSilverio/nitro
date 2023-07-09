@@ -2,17 +2,35 @@
 
 namespace App\controllers;
 
-class Usuarios
-{
-    public function index($params)
-    {
-        var_dump($params);
-        die();
-    }
+use App\classes\Permissao;
+use App\classes\Usuario;
+use Exception;
 
-    public function show($params)
+class Usuarios
+{    
+
+    public function create()
+    {        
+        return [
+            'view' => 'create.php',
+            'data' => []
+        ];        
+    }
+    
+    public function store()
     {
-        var_dump($params);
-        die();
+        $usuario = new Usuario();        
+
+        try {
+            if ($usuario->preencherDados()) {
+                $usuario->cadastrar();
+            }
+        }catch (Exception $e){
+            $e->getMessage();
+        }
+        return [
+            'view' => 'create.php',
+            'data' => []
+        ];  
     }
 }

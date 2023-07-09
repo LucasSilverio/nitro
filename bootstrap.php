@@ -1,7 +1,9 @@
 <?php
 
 require __DIR__.'/vendor/autoload.php';
+session_start();
 
+use App\helpers\Flash;
 use Nitro\App\{
     Router
 };
@@ -27,8 +29,10 @@ try {
     }
 
     $view = $data['view'];
-
     require __DIR__.'/app/views/template.php';
+    
+    $flash = new Flash();
+    $flash->clear();
     
 } catch(HttpException $e) {
     echo $e->getMessage();
